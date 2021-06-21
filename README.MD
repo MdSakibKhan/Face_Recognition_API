@@ -5,3 +5,9 @@
 * /weights -> Download DeepFace weights and put all of them here.
 
 # Call the API from postman and send base64 string of image to see the match.
+
+{
+    "img_format" : "enter format such as '.jpg'/'.png'",
+    "img" : "Enter the Actual base64 String of  the image"
+}
+
