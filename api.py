@@ -3,14 +3,31 @@ import argparse
 import base64
 import uuid
 from deepface import DeepFace
+from fuzzy import fuzzyCheck
 
 app = Flask(__name__)
-
-
 
 @app.route("/api", methods=["GET"])
 def test():
     return jsonify({'API' : 'Running'})
+
+@app.route("/api/attributeCheck", methods=["POST"])
+def attributeCheck():
+    # Get the requested Data 
+    requested_data = request.get_json()
+    
+    # Get Data.
+    info1 = requested_data["info1"]
+    info2 = requested_data["info2"]
+
+    score, strength = fuzzyCheck(info1, info2)
+
+    results = {
+            "score" : score,
+            "strength" : strength
+        }
+
+    return jsonify(results)
 
 
 @app.route("/api/findOne", methods=["POST"])
